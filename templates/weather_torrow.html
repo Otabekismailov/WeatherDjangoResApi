@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>weather</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container d-flex align-items-center justify-content-center">
+    {% for item in city %}
+        <form action="{% url 'weather-list' item.id %}" method="GET">
+            <div class="col-12">
+                <label class="visually-hidden" for="inlineFormSelectPref">Shahrni Tanlang</label>
+                <select class="form-select form_select form-select-lg" id="inlineFormSelectPref">
+
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+
+
+                </select>
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+        </form>
+    {% endfor %}
+    <div class="col-12">
+        <table class="table table-bordered table-responsive">
+            <thead class="thead-dark">
+                <th>O'rtacha temp ºC</th>
+                <th>temp ºC</th>
+                <th>time</th>
+                <th>day</th>
+            </thead>
+            <tbody>
+            {% for i in data %}
+                <tr>
+                   <td>{{ i.average_temperature }}</td>
+                    <td>{{ i.temp }}</td>
+                    <td>{{ i.time|time:"H:i"}}</td>
+                    <td>{{ i.day }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+
+</html>
